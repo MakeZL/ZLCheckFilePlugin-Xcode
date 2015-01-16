@@ -1,0 +1,286 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		481D4A3A1A67D5E70003ECFC /* ZLCheckFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 481D4A391A67D5E70003ECFC /* ZLCheckFile.m */; };
+		484A62F81A69227200FAC342 /* ZLCheckInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 484A62F71A69227200FAC342 /* ZLCheckInfo.m */; };
+		48C904961A67D8FB00455FEE /* ZLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C904951A67D8FB00455FEE /* ZLFile.m */; };
+		48FE67CF1A69154300308C79 /* ZLCheckFileDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FE67CD1A69154300308C79 /* ZLCheckFileDataViewController.m */; };
+		48FE67D01A69154300308C79 /* ZLCheckFileDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48FE67CE1A69154300308C79 /* ZLCheckFileDataViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		481D4A2E1A67D51B0003ECFC /* ZLCheckFilePlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZLCheckFilePlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		481D4A321A67D51B0003ECFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		481D4A381A67D5E70003ECFC /* ZLCheckFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLCheckFile.h; sourceTree = "<group>"; };
+		481D4A391A67D5E70003ECFC /* ZLCheckFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLCheckFile.m; sourceTree = "<group>"; };
+		484A62F61A69227200FAC342 /* ZLCheckInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLCheckInfo.h; sourceTree = "<group>"; };
+		484A62F71A69227200FAC342 /* ZLCheckInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLCheckInfo.m; sourceTree = "<group>"; };
+		48C904941A67D8FB00455FEE /* ZLFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLFile.h; sourceTree = "<group>"; };
+		48C904951A67D8FB00455FEE /* ZLFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLFile.m; sourceTree = "<group>"; };
+		48FE67CC1A69154300308C79 /* ZLCheckFileDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLCheckFileDataViewController.h; sourceTree = "<group>"; };
+		48FE67CD1A69154300308C79 /* ZLCheckFileDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLCheckFileDataViewController.m; sourceTree = "<group>"; };
+		48FE67CE1A69154300308C79 /* ZLCheckFileDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZLCheckFileDataViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		481D4A2B1A67D51B0003ECFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		481D4A251A67D51B0003ECFC = {
+			isa = PBXGroup;
+			children = (
+				481D4A301A67D51B0003ECFC /* ZLCheckFilePlugin */,
+				481D4A2F1A67D51B0003ECFC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		481D4A2F1A67D51B0003ECFC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				481D4A2E1A67D51B0003ECFC /* ZLCheckFilePlugin.xcplugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		481D4A301A67D51B0003ECFC /* ZLCheckFilePlugin */ = {
+			isa = PBXGroup;
+			children = (
+				481D4A311A67D51B0003ECFC /* Supporting Files */,
+			);
+			path = ZLCheckFilePlugin;
+			sourceTree = "<group>";
+		};
+		481D4A311A67D51B0003ECFC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				481D4A321A67D51B0003ECFC /* Info.plist */,
+				481D4A381A67D5E70003ECFC /* ZLCheckFile.h */,
+				481D4A391A67D5E70003ECFC /* ZLCheckFile.m */,
+				48C904941A67D8FB00455FEE /* ZLFile.h */,
+				48C904951A67D8FB00455FEE /* ZLFile.m */,
+				48FE67CC1A69154300308C79 /* ZLCheckFileDataViewController.h */,
+				48FE67CD1A69154300308C79 /* ZLCheckFileDataViewController.m */,
+				48FE67CE1A69154300308C79 /* ZLCheckFileDataViewController.xib */,
+				484A62F61A69227200FAC342 /* ZLCheckInfo.h */,
+				484A62F71A69227200FAC342 /* ZLCheckInfo.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		481D4A2D1A67D51B0003ECFC /* ZLCheckFilePlugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 481D4A351A67D51B0003ECFC /* Build configuration list for PBXNativeTarget "ZLCheckFilePlugin" */;
+			buildPhases = (
+				481D4A2A1A67D51B0003ECFC /* Sources */,
+				481D4A2B1A67D51B0003ECFC /* Frameworks */,
+				481D4A2C1A67D51B0003ECFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZLCheckFilePlugin;
+			productName = ZLCheckFilePlugin;
+			productReference = 481D4A2E1A67D51B0003ECFC /* ZLCheckFilePlugin.xcplugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		481D4A261A67D51B0003ECFC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = com.zixue101.www;
+				TargetAttributes = {
+					481D4A2D1A67D51B0003ECFC = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
+			};
+			buildConfigurationList = 481D4A291A67D51B0003ECFC /* Build configuration list for PBXProject "ZLCheckFilePlugin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 481D4A251A67D51B0003ECFC;
+			productRefGroup = 481D4A2F1A67D51B0003ECFC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				481D4A2D1A67D51B0003ECFC /* ZLCheckFilePlugin */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		481D4A2C1A67D51B0003ECFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48FE67D01A69154300308C79 /* ZLCheckFileDataViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		481D4A2A1A67D51B0003ECFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				484A62F81A69227200FAC342 /* ZLCheckInfo.m in Sources */,
+				48FE67CF1A69154300308C79 /* ZLCheckFileDataViewController.m in Sources */,
+				481D4A3A1A67D5E70003ECFC /* ZLCheckFile.m in Sources */,
+				48C904961A67D8FB00455FEE /* ZLFile.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		481D4A331A67D51B0003ECFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		481D4A341A67D51B0003ECFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		481D4A361A67D51B0003ECFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "${HOME}";
+				INFOPLIST_FILE = ZLCheckFilePlugin/Info.plist;
+				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = NO;
+				WRAPPER_EXTENSION = xcplugin;
+			};
+			name = Debug;
+		};
+		481D4A371A67D51B0003ECFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "${HOME}";
+				INFOPLIST_FILE = ZLCheckFilePlugin/Info.plist;
+				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = NO;
+				WRAPPER_EXTENSION = xcplugin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		481D4A291A67D51B0003ECFC /* Build configuration list for PBXProject "ZLCheckFilePlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				481D4A331A67D51B0003ECFC /* Debug */,
+				481D4A341A67D51B0003ECFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		481D4A351A67D51B0003ECFC /* Build configuration list for PBXNativeTarget "ZLCheckFilePlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				481D4A361A67D51B0003ECFC /* Debug */,
+				481D4A371A67D51B0003ECFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 481D4A261A67D51B0003ECFC /* Project object */;
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>761A8758-DB21-46FC-AB51-191721058CDC</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>99A3D545260FF73B3FB1AB0C2D949C39DE24D24D</key>
+		<string>https://github.com/MakeZL/ZLCheckFilePlugin-Xcode.git</string>
+	</dict>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>99A3D545260FF73B3FB1AB0C2D949C39DE24D24D</key>
+		<string>ZLCheckFilePlugin/</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/MakeZL/ZLCheckFilePlugin-Xcode.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>99A3D545260FF73B3FB1AB0C2D949C39DE24D24D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>99A3D545260FF73B3FB1AB0C2D949C39DE24D24D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ZLCheckFilePlugin</string>
+		</dict>
+	</array>
+</dict>
+</plist>
