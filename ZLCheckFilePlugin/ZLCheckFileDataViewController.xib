@@ -6,6 +6,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ZLCheckFileDataViewController">
             <connections>
+                <outlet property="makeView" destination="Mgu-2f-rbd" id="cNj-9Z-siB"/>
+                <outlet property="searchField" destination="3ZZ-1l-C8w" id="2bW-hI-WBg"/>
                 <outlet property="tableView" destination="M0y-MG-t6c" id="xMy-uo-bFu"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
@@ -22,13 +24,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5er-uk-HYQ">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="308"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="293"/>
                         <clipView key="contentView" identifier="ListCell" id="zoD-zm-lV2">
-                            <rect key="frame" x="1" y="17" width="478" height="290"/>
+                            <rect key="frame" x="1" y="17" width="478" height="275"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="h0E-UC-c9q" id="M0y-MG-t6c">
-                                    <rect key="frame" x="0.0" y="0.0" width="478" height="290"/>
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="h0E-UC-c9q" viewBased="YES" id="M0y-MG-t6c">
+                                    <rect key="frame" x="0.0" y="0.0" width="478" height="275"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -57,7 +59,7 @@
                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="05y-A6-lab">
-                            <rect key="frame" x="1" y="253" width="478" height="16"/>
+                            <rect key="frame" x="1" y="291" width="478" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="0Z7-J7-Ze8">
@@ -80,21 +82,64 @@
                             <action selector="exportPlist:" target="-2" id="ozI-Pj-tb1"/>
                         </connections>
                     </button>
-                    <searchField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ZZ-1l-C8w">
+                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3ZZ-1l-C8w">
                         <rect key="frame" x="140" y="322" width="328" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="9eF-qA-Ul3">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="XKv-xt-eSz"/>
+                        </constraints>
+                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="搜索文件" usesSingleLineMode="YES" bezelStyle="round" id="9eF-qA-Ul3">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </searchFieldCell>
+                        <connections>
+                            <outlet property="delegate" destination="-2" id="TgO-NR-ThD"/>
+                        </connections>
                     </searchField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CEs-9o-WiY">
+                        <rect key="frame" x="13" y="292" width="454" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="iSP-lt-auU"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Note: 此插件只为了方便查找.文件可能还被引用, 还需要人为的去观察." id="XYR-XE-vS1">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Mgu-2f-rbd">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="358"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RLJ-wp-cCY">
+                                <rect key="frame" x="184" y="169" width="91" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" placeholderString="扫描文件中......" id="xT3-Qv-O88">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </customView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="5er-uk-HYQ" secondAttribute="bottom" id="38l-Vb-bpO"/>
+                    <constraint firstAttribute="trailing" secondItem="CEs-9o-WiY" secondAttribute="trailing" constant="15" id="40Z-0V-EYg"/>
+                    <constraint firstAttribute="trailing" secondItem="Mgu-2f-rbd" secondAttribute="trailing" id="7eh-cK-QRd"/>
+                    <constraint firstItem="Mgu-2f-rbd" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="8ct-NK-DhG"/>
+                    <constraint firstAttribute="bottom" secondItem="Mgu-2f-rbd" secondAttribute="bottom" id="FL2-pD-IhK"/>
+                    <constraint firstAttribute="trailing" secondItem="3ZZ-1l-C8w" secondAttribute="trailing" constant="12" id="IG5-Eq-oXw"/>
+                    <constraint firstItem="3ZZ-1l-C8w" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="140" id="SWV-hh-HZ6"/>
+                    <constraint firstItem="3ZZ-1l-C8w" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="14" id="VJe-cM-RDv"/>
                     <constraint firstAttribute="trailing" secondItem="5er-uk-HYQ" secondAttribute="trailing" id="bEn-ya-ZSJ"/>
-                    <constraint firstItem="5er-uk-HYQ" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="50" id="hwt-6Q-Y0o"/>
+                    <constraint firstItem="Mgu-2f-rbd" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="gm4-yo-oVN"/>
+                    <constraint firstItem="5er-uk-HYQ" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="65" id="hwt-6Q-Y0o"/>
                     <constraint firstItem="5er-uk-HYQ" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="leY-On-hlZ"/>
+                    <constraint firstItem="CEs-9o-WiY" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="15" id="nmG-8C-Qrt"/>
+                    <constraint firstItem="CEs-9o-WiY" firstAttribute="top" secondItem="3ZZ-1l-C8w" secondAttribute="bottom" constant="7" id="oyA-d9-yRn"/>
                 </constraints>
             </view>
             <connections>

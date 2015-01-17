@@ -10,10 +10,12 @@
 #import "ZLCheckInfo.h"
 #import "ZLFile.h"
 
-@interface ZLCheckFileDataViewController () <NSTableViewDataSource,NSTableViewDelegate>
+@interface ZLCheckFileDataViewController () <NSTableViewDataSource,NSTableViewDelegate,NSTextFieldDelegate>
 @property (weak) IBOutlet NSTableView *tableView;
 @property (strong,nonatomic) NSArray *datas;
 - (IBAction)exportPlist:(id)sender;
+@property (weak) IBOutlet NSSearchField *searchField;
+@property (weak) IBOutlet NSView *makeView;
 
 @end
 
@@ -22,10 +24,12 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
+    [self.makeView setHidden:NO];
     __weak typeof(self)weakSelf = self;
     [[ZLCheckInfo sharedInstance] getFilesWithCallBack:^(NSArray *arr) {
         weakSelf.datas = arr;
         [weakSelf.tableView reloadData];
+        [weakSelf.makeView setHidden:YES];
     }];
 }
 
@@ -57,6 +61,11 @@
     NSString *open = [NSString stringWithFormat:@"open %@",path];
     const char *str = [open UTF8String];
     system(str);
+}
+
+- (void)controlTextDidChange:(NSNotification *)obj{
+    self.datas = [[ZLCheckInfo sharedInstance] searchFilesWithText:[obj.object stringValue]];
+    [self.tableView reloadData];
 }
 
 - (IBAction)exportPlist:(id)sender {

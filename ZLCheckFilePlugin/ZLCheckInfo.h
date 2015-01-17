@@ -21,4 +21,5 @@ typedef void(^callBack)(NSArray *arr);
 // return .plist file Path.
 - (NSString *)exportFilesInBundlePlist;
 
+- (NSArray *)searchFilesWithText:(NSString *)searchText;
 @end
