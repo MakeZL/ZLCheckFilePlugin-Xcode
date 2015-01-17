@@ -15,20 +15,20 @@
         <window title="ZLCheckFilePlugin" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="358"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <rect key="frame" x="0.0" y="0.0" width="480" height="358"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5er-uk-HYQ">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="308"/>
                         <clipView key="contentView" identifier="ListCell" id="zoD-zm-lV2">
-                            <rect key="frame" x="1" y="17" width="478" height="252"/>
+                            <rect key="frame" x="1" y="17" width="478" height="290"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="h0E-UC-c9q" id="M0y-MG-t6c">
-                                    <rect key="frame" x="0.0" y="0.0" width="478" height="252"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="478" height="290"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -69,11 +69,22 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7k1-Jw-aeK">
+                        <rect key="frame" x="7" y="316" width="82" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="导出.plist文件" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="l4N-Mh-ILV">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="exportPlist:" target="-2" id="ozI-Pj-tb1"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="5er-uk-HYQ" secondAttribute="bottom" id="38l-Vb-bpO"/>
                     <constraint firstAttribute="trailing" secondItem="5er-uk-HYQ" secondAttribute="trailing" id="bEn-ya-ZSJ"/>
-                    <constraint firstItem="5er-uk-HYQ" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="hwt-6Q-Y0o"/>
+                    <constraint firstItem="5er-uk-HYQ" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="50" id="hwt-6Q-Y0o"/>
                     <constraint firstItem="5er-uk-HYQ" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="leY-On-hlZ"/>
                 </constraints>
             </view>

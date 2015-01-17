@@ -18,4 +18,7 @@ typedef void(^callBack)(NSArray *arr);
 @property (copy,nonatomic) NSString *workSpacePath;
 
 - (void)getFilesWithCallBack:(callBack)callBack;
+// return .plist file Path.
+- (NSString *)exportFilesInBundlePlist;
+
 @end

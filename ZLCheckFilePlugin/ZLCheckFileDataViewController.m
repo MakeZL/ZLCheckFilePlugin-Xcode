@@ -13,6 +13,7 @@
 @interface ZLCheckFileDataViewController () <NSTableViewDataSource,NSTableViewDelegate>
 @property (weak) IBOutlet NSTableView *tableView;
 @property (strong,nonatomic) NSArray *datas;
+- (IBAction)exportPlist:(id)sender;
 
 @end
 
@@ -21,10 +22,10 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
+    __weak typeof(self)weakSelf = self;
     [[ZLCheckInfo sharedInstance] getFilesWithCallBack:^(NSArray *arr) {
-        _datas = arr;
-        NSLog(@"CallBack : %@",_datas);
-        [self.tableView reloadData];
+        weakSelf.datas = arr;
+        [weakSelf.tableView reloadData];
     }];
 }
 
@@ -54,9 +55,11 @@
     }
 
     NSString *open = [NSString stringWithFormat:@"open %@",path];
-    NSLog(@"%@",open);
     const char *str = [open UTF8String];
     system(str);
 }
 
+- (IBAction)exportPlist:(id)sender {
+    [self openFinderWithFilePath:[[ZLCheckInfo sharedInstance] exportFilesInBundlePlist]];
+}
 @end

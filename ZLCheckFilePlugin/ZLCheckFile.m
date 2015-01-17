@@ -13,7 +13,6 @@
 
 @interface ZLCheckFile ()
 
-@property (strong,nonatomic) NSFileManager *fileManager;
 @property (copy,nonatomic) NSString *workspacePath;
 @property (strong,nonatomic) ZLCheckFileDataViewController *detaVc;
 @end

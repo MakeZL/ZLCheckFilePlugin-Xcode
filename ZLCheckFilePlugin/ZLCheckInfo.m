@@ -163,12 +163,6 @@ static id _instance = nil;
                 }
             }
             
-            //            NSString *plist = [[_instance workSpacePath] stringByAppendingPathComponent:@"files.plist"];
-            //            NSMutableArray *array = [NSMutableArray array];
-            //            for (ZLFile *file in endPathsM) {
-            //                [array addObject:@{@"name":file.fileName,@"path":file.filePath}];
-            //            }
-            //            [array writeToFile:plist atomically:YES];
             dispatch_async(dispatch_get_main_queue(), ^{
                 _files = endPathsM;
                 callBack(_files);
@@ -178,4 +172,16 @@ static id _instance = nil;
 
 }
 
+- (NSString *)exportFilesInBundlePlist{
+    NSString *plist = [[[_instance workSpacePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"ZLCheckFilePlugin-Files.plist"];
+    NSMutableArray *array = [NSMutableArray array];
+    for (ZLFile *file in _files) {
+        [array addObject:@{@"name":file.fileName,@"path":file.filePath}];
+    }
+    if([array writeToFile:plist atomically:YES]){
+        return plist;
+    }else{
+        return nil;
+    }
+}
 @end
