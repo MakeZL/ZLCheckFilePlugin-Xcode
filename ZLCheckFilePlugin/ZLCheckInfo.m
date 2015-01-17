@@ -14,6 +14,8 @@
 @property (strong,nonatomic) NSFileManager *fileManager;
 // array is files > @[ZLFile,ZLFile] ...
 @property (strong,nonatomic) NSArray *files;
+// project InfoPlist Dict.
+@property (strong,nonatomic) NSDictionary *infoDict;
 
 @end
 
@@ -44,6 +46,17 @@ static id _instance = nil;
             
             for (NSString *pathName in paths) {
                 
+                if (!self.infoDict) {
+                    if([[[pathName lastPathComponent] pathExtension] isEqualToString:@"plist"]){
+                        NSString *mPath = [filePath stringByAppendingPathComponent:pathName];
+                        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:mPath];
+                        
+                        if ([dict valueForKeyPath:@"UIMainStoryboardFile"]) {
+                            self.infoDict = dict;
+                        }
+                    }
+                }
+                
                 if (!([[[pathName lastPathComponent] pathExtension] isEqualToString:@"h"] ||
                       [[[pathName lastPathComponent] pathExtension] isEqualToString:@"m"]
                       || [[[pathName lastPathComponent] pathExtension] isEqualToString:@"pch"]
@@ -51,6 +64,7 @@ static id _instance = nil;
                     ) {
                     continue;
                 }
+                
                 ZLFile *file = [[ZLFile alloc] init];
                 file.fileName = [pathName lastPathComponent];
                 file.filePath = pathName;
@@ -82,7 +96,7 @@ static id _instance = nil;
                             }
                         }
                     }
-                }else if ([pathName hasSuffix:@"storyboard"]){
+                }else {
                     for (NSString *lineStr in mPathLineContents) {
                         NSRange lineRange = [lineStr rangeOfString:@"customClass=\""];
                         if(lineRange.location != NSNotFound){
@@ -103,7 +117,7 @@ static id _instance = nil;
                 for (NSString *preStr in deletePaths) {
                     if ([[file.fileName stringByDeletingPathExtension] isEqualToString:[preStr stringByDeletingPathExtension]]
                         || [file.fileName isEqualToString:@"main.m"]
-                        || [file.fileName isEqualToString:@"Main.storyboard"]) {
+                        || [file.fileName isEqualToString:[self.infoDict[@"UIMainStoryboardFile"] stringByAppendingString:@".storyboard"]]) {
                         [endPathsM removeObject:file];
                         break;
                     }
