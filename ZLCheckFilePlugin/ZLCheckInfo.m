@@ -35,77 +35,6 @@ static id _instance = nil;
     return _instance;
 }
 
-- (NSArray *)files{
-    if (!_files) {
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSString *filePath = [_instance workSpacePath];
-            NSArray *paths = [self.fileManager subpathsAtPath:filePath];
-            NSMutableArray *allPathsM = [NSMutableArray array];
-            
-            for (NSString *pathName in paths) {
-                
-                if (!([[[pathName lastPathComponent] pathExtension] isEqualToString:@"h"] ||
-                      [[[pathName lastPathComponent] pathExtension] isEqualToString:@"m"]
-                      || [[[pathName lastPathComponent] pathExtension] isEqualToString:@"pch"])
-                    ) {
-                    continue;
-                }
-                ZLFile *file = [[ZLFile alloc] init];
-                file.fileName = [pathName lastPathComponent];
-                file.filePath = pathName;
-                [allPathsM addObject:file];
-            }
-            
-            NSMutableArray *endPathsM = [NSMutableArray arrayWithArray:allPathsM];
-            NSMutableArray *deletePaths = [NSMutableArray array];
-            
-            for (ZLFile *file in allPathsM) {
-                NSString *pathName = file.fileName;
-                
-                if ([pathName hasSuffix:@"h"] || [pathName hasSuffix:@"m"] || [pathName hasSuffix:@"pch"]) {
-                    NSString *mPath = [filePath stringByAppendingPathComponent:file.filePath];
-                    
-                    NSString *content = [[NSString alloc] initWithContentsOfFile:mPath encoding:NSUTF8StringEncoding error:nil];
-                    
-                    NSArray *mPathLineContents = [content componentsSeparatedByString:@"\n"];
-                    for (NSString *lineStr in mPathLineContents) {
-                        NSRange preRange = [lineStr rangeOfString:@"#import \""];
-                        if (preRange.location != NSNotFound) {
-                            NSString *replaceStr = [lineStr substringFromIndex:preRange.location + preRange.length];
-                            NSString *preStr = [replaceStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-                            
-                            if (![[pathName stringByDeletingPathExtension] isEqualToString:[preStr stringByDeletingPathExtension]]) {
-                                [deletePaths addObject:preStr];
-                            }
-                        }
-                    }
-                }
-            }
-            
-            for (ZLFile *file in allPathsM) {
-                for (NSString *preStr in deletePaths) {
-                    if ([[file.fileName stringByDeletingPathExtension] isEqualToString:[preStr stringByDeletingPathExtension]]
-                        || [file.fileName isEqualToString:@"main.m"] ) {
-                        [endPathsM removeObject:file];
-                        break;
-                    }
-                }
-            }
-            
-//            NSString *plist = [[_instance workSpacePath] stringByAppendingPathComponent:@"files.plist"];
-//            NSMutableArray *array = [NSMutableArray array];
-//            for (ZLFile *file in endPathsM) {
-//                [array addObject:@{@"name":file.fileName,@"path":file.filePath}];
-//            }
-//            [array writeToFile:plist atomically:YES];
-                _files = endPathsM;
-        });
-        
-    }
-    return _files;
-}
-
 - (void)getFilesWithCallBack:(callBack)callBack{
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -117,7 +46,8 @@ static id _instance = nil;
                 
                 if (!([[[pathName lastPathComponent] pathExtension] isEqualToString:@"h"] ||
                       [[[pathName lastPathComponent] pathExtension] isEqualToString:@"m"]
-                      || [[[pathName lastPathComponent] pathExtension] isEqualToString:@"pch"])
+                      || [[[pathName lastPathComponent] pathExtension] isEqualToString:@"pch"]
+                      || [[[pathName lastPathComponent] pathExtension] isEqualToString:@"storyboard"])
                     ) {
                     continue;
                 }
@@ -133,12 +63,14 @@ static id _instance = nil;
             for (ZLFile *file in allPathsM) {
                 NSString *pathName = file.fileName;
                 
+                NSString *mPath = [filePath stringByAppendingPathComponent:file.filePath];
+                
+                NSString *content = [[NSString alloc] initWithContentsOfFile:mPath encoding:NSUTF8StringEncoding error:nil];
+                
+                NSArray *mPathLineContents = [content componentsSeparatedByString:@"\n"];
+                
                 if ([pathName hasSuffix:@"h"] || [pathName hasSuffix:@"m"] || [pathName hasSuffix:@"pch"]) {
-                    NSString *mPath = [filePath stringByAppendingPathComponent:file.filePath];
                     
-                    NSString *content = [[NSString alloc] initWithContentsOfFile:mPath encoding:NSUTF8StringEncoding error:nil];
-                    
-                    NSArray *mPathLineContents = [content componentsSeparatedByString:@"\n"];
                     for (NSString *lineStr in mPathLineContents) {
                         NSRange preRange = [lineStr rangeOfString:@"#import \""];
                         if (preRange.location != NSNotFound) {
@@ -150,13 +82,28 @@ static id _instance = nil;
                             }
                         }
                     }
+                }else if ([pathName hasSuffix:@"storyboard"]){
+                    for (NSString *lineStr in mPathLineContents) {
+                        NSRange lineRange = [lineStr rangeOfString:@"customClass=\""];
+                        if(lineRange.location != NSNotFound){
+                            NSString *str = [lineStr substringFromIndex:lineRange.location + lineRange.length];
+                            NSRange lineStrRange = [str rangeOfString:@"\""];
+                            str = [str substringWithRange:NSMakeRange(0, lineStrRange.location)];
+                            
+                            if (![[pathName stringByDeletingPathExtension] isEqualToString:[str stringByDeletingPathExtension]]) {
+                                [deletePaths addObject:str];
+                            }
+                        }
+                        
+                    }
                 }
             }
             
             for (ZLFile *file in allPathsM) {
                 for (NSString *preStr in deletePaths) {
                     if ([[file.fileName stringByDeletingPathExtension] isEqualToString:[preStr stringByDeletingPathExtension]]
-                        || [file.fileName isEqualToString:@"main.m"] ) {
+                        || [file.fileName isEqualToString:@"main.m"]
+                        || [file.fileName isEqualToString:@"Main.storyboard"]) {
                         [endPathsM removeObject:file];
                         break;
                     }
@@ -184,4 +131,5 @@ static id _instance = nil;
         return nil;
     }
 }
+
 @end

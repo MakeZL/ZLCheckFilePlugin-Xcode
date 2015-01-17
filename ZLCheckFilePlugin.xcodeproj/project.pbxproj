@@ -66,18 +66,34 @@
 		481D4A311A67D51B0003ECFC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				489767C01A6A06510090C48A /* Model */,
+				489767BF1A6A06440090C48A /* ViewController */,
 				481D4A321A67D51B0003ECFC /* Info.plist */,
 				481D4A381A67D5E70003ECFC /* ZLCheckFile.h */,
 				481D4A391A67D5E70003ECFC /* ZLCheckFile.m */,
-				48C904941A67D8FB00455FEE /* ZLFile.h */,
-				48C904951A67D8FB00455FEE /* ZLFile.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		489767BF1A6A06440090C48A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
 				48FE67CC1A69154300308C79 /* ZLCheckFileDataViewController.h */,
 				48FE67CD1A69154300308C79 /* ZLCheckFileDataViewController.m */,
 				48FE67CE1A69154300308C79 /* ZLCheckFileDataViewController.xib */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		489767C01A6A06510090C48A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				48C904941A67D8FB00455FEE /* ZLFile.h */,
+				48C904951A67D8FB00455FEE /* ZLFile.m */,
 				484A62F61A69227200FAC342 /* ZLCheckInfo.h */,
 				484A62F71A69227200FAC342 /* ZLCheckInfo.m */,
 			);
-			name = "Supporting Files";
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
