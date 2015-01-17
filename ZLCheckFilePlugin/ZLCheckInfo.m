@@ -160,7 +160,7 @@ static id _instance = nil;
     NSString *plist = [[[_instance workSpacePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"ZLCheckFilePlugin-Files.plist"];
     NSMutableArray *array = [NSMutableArray array];
     for (ZLFile *file in _files) {
-        [array addObject:@{@"name":file.fileName,@"path":file.filePath}];
+        [array addObject:@{@"name":file.fileName,@"path":[[_instance workSpacePath] stringByAppendingPathComponent:file.filePath]}];
     }
     if([array writeToFile:plist atomically:YES]){
         return plist;
