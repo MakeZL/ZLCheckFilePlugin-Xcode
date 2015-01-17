@@ -18,15 +18,14 @@
 
 @implementation ZLCheckFileDataViewController
 
-- (NSArray *)datas{
-    if (!_datas) {
-        _datas = [[ZLCheckInfo sharedInstance] files];
-    }
-    return _datas;
-}
-
 - (void)windowDidLoad {
     [super windowDidLoad];
+    
+    [[ZLCheckInfo sharedInstance] getFilesWithCallBack:^(NSArray *arr) {
+        _datas = arr;
+        NSLog(@"CallBack : %@",_datas);
+        [self.tableView reloadData];
+    }];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{

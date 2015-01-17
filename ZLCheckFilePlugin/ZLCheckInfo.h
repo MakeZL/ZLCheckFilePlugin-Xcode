@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^callBack)(NSArray *arr);
+
 @interface ZLCheckInfo : NSObject
 
 + (instancetype)sharedInstance;
@@ -15,7 +17,5 @@
 // work path
 @property (copy,nonatomic) NSString *workSpacePath;
 
-// array is files > @[ZLFile,ZLFile] ...
-@property (strong,nonatomic) NSArray *files;
-
+- (void)getFilesWithCallBack:(callBack)callBack;
 @end
