@@ -16,6 +16,7 @@
 - (IBAction)exportPlist:(id)sender;
 @property (weak) IBOutlet NSSearchField *searchField;
 @property (weak) IBOutlet NSView *makeView;
+@property (weak) IBOutlet NSTextField *makeTextField;
 
 @end
 
@@ -27,9 +28,13 @@
     [self.makeView setHidden:NO];
     __weak typeof(self)weakSelf = self;
     [[ZLCheckInfo sharedInstance] getFilesWithCallBack:^(NSArray *arr) {
-        weakSelf.datas = arr;
-        [weakSelf.tableView reloadData];
-        [weakSelf.makeView setHidden:YES];
+        if (!arr.count) {
+            [weakSelf.makeTextField setStringValue:@"您可能没有多余文件"];
+        }else{
+            weakSelf.datas = arr;
+            [weakSelf.tableView reloadData];
+            [weakSelf.makeView setHidden:YES];
+        }
     }];
 }
 

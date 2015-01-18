@@ -7,6 +7,7 @@
 //
 
 #import "ZLCheckInfo.h"
+#import "NSArray+Ext.h"
 #import "ZLFile.h"
 
 @interface ZLCheckInfo ()
@@ -17,15 +18,51 @@
 // project InfoPlist Dict.
 @property (strong,nonatomic) NSDictionary *infoDict;
 
+@property (strong,nonatomic) NSArray *matchsFileArray;
+@property (strong,nonatomic) NSArray *headerFileArray;
 @end
+
+static NSString *staticPlist = @"plist";
+static NSString *staticStoryboard = @"storyboard";
+static NSString *staticImplementation = @"implementation";
+static NSString *UIMainStoryboardFile = @"UIMainStoryboardFile";
+static NSString *staticAppDelegate = @"AppDelegate";
+
+static NSString *staticImport = @"#import";
+static NSString *staticInclude = @"#include";
 
 @implementation ZLCheckInfo
 
+#pragma mark - lazy datas.
 - (NSFileManager *)fileManager{
     if (!_fileManager) {
         _fileManager = [NSFileManager defaultManager];
     }
     return _fileManager;
+}
+
+- (NSArray *)matchsFileArray{
+    if (!_matchsFileArray) {
+        _matchsFileArray = @[
+                             @"main.m",
+                             @"main.cpp",
+                             @"AppDelegate",
+                             ];
+    }
+    return _matchsFileArray;
+}
+
+- (NSArray *)headerFileArray{
+    if (!_headerFileArray) {
+        _headerFileArray = @[
+                             @"h",
+                             @"m",
+                             @"cpp",
+                             @"storyboard",
+                             @"pch",
+                             ];
+    }
+    return _headerFileArray;
 }
 
 static id _instance = nil;
@@ -37,6 +74,7 @@ static id _instance = nil;
     return _instance;
 }
 
+#pragma mark - get Files in callBack
 - (void)getFilesWithCallBack:(callBack)callBack{
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -47,21 +85,17 @@ static id _instance = nil;
             for (NSString *pathName in paths) {
                 
                 if (!self.infoDict) {
-                    if([[[pathName lastPathComponent] pathExtension] isEqualToString:@"plist"]){
+                    if([[[pathName lastPathComponent] pathExtension] isEqualToString:staticPlist]){
                         NSString *mPath = [filePath stringByAppendingPathComponent:pathName];
                         NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:mPath];
                         
-                        if ([dict valueForKeyPath:@"UIMainStoryboardFile"]) {
+                        if ([dict valueForKeyPath:UIMainStoryboardFile]) {
                             self.infoDict = dict;
                         }
                     }
                 }
-                
-                if (!([[[pathName lastPathComponent] pathExtension] isEqualToString:@"h"] ||
-                      [[[pathName lastPathComponent] pathExtension] isEqualToString:@"m"]
-                      || [[[pathName lastPathComponent] pathExtension] isEqualToString:@"pch"]
-                      || [[[pathName lastPathComponent] pathExtension] isEqualToString:@"storyboard"])
-                    ) {
+
+                if (![self.headerFileArray inArray:[[pathName lastPathComponent] pathExtension]]){
                     continue;
                 }
                 
@@ -83,17 +117,30 @@ static id _instance = nil;
                 
                 NSArray *mPathLineContents = [content componentsSeparatedByString:@"\n"];
                 
-                if ([pathName hasSuffix:@"h"] || [pathName hasSuffix:@"m"] || [pathName hasSuffix:@"pch"]) {
+                if (![pathName hasSuffix:staticStoryboard]
+                    ) {
                     
                     for (NSString *lineStr in mPathLineContents) {
                         
-                        NSRange implementationRange = [lineStr rangeOfString:@"@implementation"];
+                        NSRange implementationRange = [lineStr rangeOfString:staticImplementation];
                         if (implementationRange.location != NSNotFound) {
                             break;
                         }else{
-                            NSRange preRange = [lineStr rangeOfString:@"#import \""];
+                            NSRange preRange = [lineStr rangeOfString:staticImport];
+                            NSRange includeRange = [lineStr rangeOfString:staticInclude];
                             if (preRange.location != NSNotFound) {
-                                NSString *replaceStr = [lineStr substringFromIndex:preRange.location + preRange.length];
+                                
+                                if (preRange.location == NSNotFound) {
+                                    preRange = includeRange;
+                                }
+                                
+                                NSRange charRange = [lineStr rangeOfString:@"\""];
+                                NSInteger charIndex = 0;
+                                if (charRange.location != NSNotFound) {
+                                   charIndex = (charRange.location - (preRange.location + preRange.length) + charRange.length);
+                                }
+                                
+                                NSString *replaceStr = [lineStr substringFromIndex:preRange.location + preRange.length + charIndex];
                                 NSString *preStr = [replaceStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                                 
                                 if (![[pathName stringByDeletingPathExtension] isEqualToString:[preStr stringByDeletingPathExtension]]) {
@@ -124,9 +171,9 @@ static id _instance = nil;
             for (ZLFile *file in allPathsM) {
                 for (NSString *preStr in deletePaths) {
                     if ([[file.fileName stringByDeletingPathExtension] isEqualToString:[preStr stringByDeletingPathExtension]]
-                        || [file.fileName isEqualToString:@"main.m"]
-                        || [file.fileName rangeOfString:@"AppDelegate"].location != NSNotFound
-                        || [file.fileName isEqualToString:[self.infoDict[@"UIMainStoryboardFile"] stringByAppendingString:@".storyboard"]]) {
+                        || [file.fileName rangeOfString:staticAppDelegate].location != NSNotFound
+                        || [file.fileName isEqualToString:[self.infoDict[UIMainStoryboardFile] stringByAppendingPathExtension:staticStoryboard]]
+                        || [self.matchsFileArray inArray:file.fileName]) {
                         [endPathsM removeObject:file];
                         break;
                     }
@@ -142,31 +189,25 @@ static id _instance = nil;
 
 }
 
+#pragma mark - search files
 - (NSArray *)searchFilesWithText:(NSString *)searchText{
     if (!searchText.length) {
         return _files;
     }
     
-    NSMutableArray *array = [NSMutableArray array];
-    for (ZLFile *file in _files) {
-        if([[file.fileName lowercaseString] rangeOfString:[searchText lowercaseString]].location != NSNotFound){
-            [array addObject:file];
-        }
-    }
-    return array;
+    return [self.files searchArrayWithSearchText:searchText];
 }
 
+#pragma mark - export Plist
 - (NSString *)exportFilesInBundlePlist{
+    
     NSString *plist = [[[_instance workSpacePath] stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"ZLCheckFilePlugin-Files.plist"];
-    NSMutableArray *array = [NSMutableArray array];
-    for (ZLFile *file in _files) {
-        [array addObject:@{@"name":file.fileName,@"path":[[_instance workSpacePath] stringByAppendingPathComponent:file.filePath]}];
-    }
-    if([array writeToFile:plist atomically:YES]){
+    
+    if ([_files exportPlistWithPath:plist]) {
         return plist;
-    }else{
-        return nil;
     }
+    
+    return nil;
 }
 
 @end

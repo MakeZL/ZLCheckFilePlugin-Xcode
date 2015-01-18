@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		481D4A3A1A67D5E70003ECFC /* ZLCheckFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 481D4A391A67D5E70003ECFC /* ZLCheckFile.m */; };
 		484A62F81A69227200FAC342 /* ZLCheckInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 484A62F71A69227200FAC342 /* ZLCheckInfo.m */; };
+		48806FC71A6B50F900DBFB53 /* NSArray+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 48806FC61A6B50F900DBFB53 /* NSArray+Ext.m */; };
 		48C904961A67D8FB00455FEE /* ZLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C904951A67D8FB00455FEE /* ZLFile.m */; };
 		48FE67CF1A69154300308C79 /* ZLCheckFileDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48FE67CD1A69154300308C79 /* ZLCheckFileDataViewController.m */; };
 		48FE67D01A69154300308C79 /* ZLCheckFileDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48FE67CE1A69154300308C79 /* ZLCheckFileDataViewController.xib */; };
@@ -21,6 +22,8 @@
 		481D4A391A67D5E70003ECFC /* ZLCheckFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLCheckFile.m; sourceTree = "<group>"; };
 		484A62F61A69227200FAC342 /* ZLCheckInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLCheckInfo.h; sourceTree = "<group>"; };
 		484A62F71A69227200FAC342 /* ZLCheckInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLCheckInfo.m; sourceTree = "<group>"; };
+		48806FC51A6B50F900DBFB53 /* NSArray+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Ext.h"; sourceTree = "<group>"; };
+		48806FC61A6B50F900DBFB53 /* NSArray+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Ext.m"; sourceTree = "<group>"; };
 		48C904941A67D8FB00455FEE /* ZLFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLFile.h; sourceTree = "<group>"; };
 		48C904951A67D8FB00455FEE /* ZLFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLFile.m; sourceTree = "<group>"; };
 		48FE67CC1A69154300308C79 /* ZLCheckFileDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLCheckFileDataViewController.h; sourceTree = "<group>"; };
@@ -66,6 +69,7 @@
 		481D4A311A67D51B0003ECFC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				48806FC41A6B50E200DBFB53 /* Category */,
 				489767C01A6A06510090C48A /* Model */,
 				489767BF1A6A06440090C48A /* ViewController */,
 				481D4A321A67D51B0003ECFC /* Info.plist */,
@@ -73,6 +77,15 @@
 				481D4A391A67D5E70003ECFC /* ZLCheckFile.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		48806FC41A6B50E200DBFB53 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				48806FC51A6B50F900DBFB53 /* NSArray+Ext.h */,
+				48806FC61A6B50F900DBFB53 /* NSArray+Ext.m */,
+			);
+			name = Category;
 			sourceTree = "<group>";
 		};
 		489767BF1A6A06440090C48A /* ViewController */ = {
@@ -164,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				484A62F81A69227200FAC342 /* ZLCheckInfo.m in Sources */,
+				48806FC71A6B50F900DBFB53 /* NSArray+Ext.m in Sources */,
 				48FE67CF1A69154300308C79 /* ZLCheckFileDataViewController.m in Sources */,
 				481D4A3A1A67D5E70003ECFC /* ZLCheckFile.m in Sources */,
 				48C904961A67D8FB00455FEE /* ZLFile.m in Sources */,

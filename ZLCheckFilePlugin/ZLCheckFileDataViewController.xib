@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ZLCheckFileDataViewController">
             <connections>
+                <outlet property="makeTextField" destination="RLJ-wp-cCY" id="wA6-QD-9xh"/>
                 <outlet property="makeView" destination="Mgu-2f-rbd" id="cNj-9Z-siB"/>
                 <outlet property="searchField" destination="3ZZ-1l-C8w" id="2bW-hI-WBg"/>
                 <outlet property="tableView" destination="M0y-MG-t6c" id="xMy-uo-bFu"/>
@@ -48,6 +49,26 @@
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                            <prototypeCellViews>
+                                                <tableCellView id="QKM-sa-D5W">
+                                                    <rect key="frame" x="1" y="1" width="475" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uHk-pZ-hgg">
+                                                            <rect key="frame" x="0.0" y="0.0" width="475" height="17"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="zd1-fS-JUk">
+                                                                <font key="font" metaFont="system"/>
+                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </subviews>
+                                                    <connections>
+                                                        <outlet property="textField" destination="uHk-pZ-hgg" id="Px6-A7-Wmq"/>
+                                                    </connections>
+                                                </tableCellView>
+                                            </prototypeCellViews>
                                         </tableColumn>
                                     </tableColumns>
                                     <connections>
@@ -113,9 +134,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="358"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RLJ-wp-cCY">
-                                <rect key="frame" x="184" y="169" width="91" height="17"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RLJ-wp-cCY">
+                                <rect key="frame" x="-2" y="169" width="484" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="b8b-9N-WGX"/>
+                                </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" placeholderString="扫描文件中......" id="xT3-Qv-O88">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -123,6 +147,11 @@
                                 </textFieldCell>
                             </textField>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="RLJ-wp-cCY" firstAttribute="leading" secondItem="Mgu-2f-rbd" secondAttribute="leading" id="3jE-1c-dbk"/>
+                            <constraint firstAttribute="centerY" secondItem="RLJ-wp-cCY" secondAttribute="centerY" constant="-1.5" id="UIC-6x-zqF"/>
+                            <constraint firstAttribute="trailing" secondItem="RLJ-wp-cCY" secondAttribute="trailing" id="m5p-jV-p3F"/>
+                        </constraints>
                     </customView>
                 </subviews>
                 <constraints>
