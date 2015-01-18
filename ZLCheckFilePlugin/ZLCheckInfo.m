@@ -22,14 +22,19 @@
 @property (strong,nonatomic) NSArray *headerFileArray;
 @end
 
+// other static
 static NSString *staticPlist = @"plist";
 static NSString *staticStoryboard = @"storyboard";
-static NSString *staticImplementation = @"implementation";
+static NSString *staticImplementation = @"@implementation";
 static NSString *UIMainStoryboardFile = @"UIMainStoryboardFile";
 static NSString *staticAppDelegate = @"AppDelegate";
 
+// import static
 static NSString *staticImport = @"#import";
 static NSString *staticInclude = @"#include";
+
+// storyboard static
+static NSString *staticStoryboardCustomClass = @"customClass";
 
 @implementation ZLCheckInfo
 
@@ -45,6 +50,8 @@ static NSString *staticInclude = @"#include";
     if (!_matchsFileArray) {
         _matchsFileArray = @[
                              @"main.m",
+                             @"main.h",
+                             @"main.c",
                              @"main.cpp",
                              @"AppDelegate",
                              ];
@@ -57,6 +64,7 @@ static NSString *staticInclude = @"#include";
         _headerFileArray = @[
                              @"h",
                              @"m",
+                             @"c",
                              @"cpp",
                              @"storyboard",
                              @"pch",
@@ -109,10 +117,9 @@ static id _instance = nil;
             NSMutableArray *deletePaths = [NSMutableArray array];
             
             for (ZLFile *file in allPathsM) {
+                
                 NSString *pathName = file.fileName;
-                
                 NSString *mPath = [filePath stringByAppendingPathComponent:file.filePath];
-                
                 NSString *content = [[NSString alloc] initWithContentsOfFile:mPath encoding:NSUTF8StringEncoding error:nil];
                 
                 NSArray *mPathLineContents = [content componentsSeparatedByString:@"\n"];
@@ -128,11 +135,12 @@ static id _instance = nil;
                         }else{
                             NSRange preRange = [lineStr rangeOfString:staticImport];
                             NSRange includeRange = [lineStr rangeOfString:staticInclude];
+                            if (preRange.location == NSNotFound) {
+                                preRange = includeRange;
+                            }
+                            
                             if (preRange.location != NSNotFound) {
                                 
-                                if (preRange.location == NSNotFound) {
-                                    preRange = includeRange;
-                                }
                                 
                                 NSRange charRange = [lineStr rangeOfString:@"\""];
                                 NSInteger charIndex = 0;
@@ -142,7 +150,6 @@ static id _instance = nil;
                                 
                                 NSString *replaceStr = [lineStr substringFromIndex:preRange.location + preRange.length + charIndex];
                                 NSString *preStr = [replaceStr stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-                                
                                 if (![[pathName stringByDeletingPathExtension] isEqualToString:[preStr stringByDeletingPathExtension]]) {
                                     [deletePaths addObject:preStr];
                                 }
@@ -153,7 +160,7 @@ static id _instance = nil;
                 }else {
                     // storyBoard xml
                     for (NSString *lineStr in mPathLineContents) {
-                        NSRange lineRange = [lineStr rangeOfString:@"customClass=\""];
+                        NSRange lineRange = [lineStr rangeOfString:[NSString stringWithFormat:@"%@=\"",staticStoryboardCustomClass]];
                         if(lineRange.location != NSNotFound){
                             NSString *str = [lineStr substringFromIndex:lineRange.location + lineRange.length];
                             NSRange lineStrRange = [str rangeOfString:@"\""];
@@ -168,12 +175,21 @@ static id _instance = nil;
                 }
             }
             
+            
             for (ZLFile *file in allPathsM) {
+                
+                if ([self.matchsFileArray inArray:[file.fileName lastPathComponent]]) {
+                    [endPathsM removeObject:file];
+                }
+                
                 for (NSString *preStr in deletePaths) {
-                    if ([[file.fileName stringByDeletingPathExtension] isEqualToString:[preStr stringByDeletingPathExtension]]
+                    
+                    if (
+                        [[file.fileName stringByDeletingPathExtension] isEqualToString:[preStr stringByDeletingPathExtension]]
                         || [file.fileName rangeOfString:staticAppDelegate].location != NSNotFound
                         || [file.fileName isEqualToString:[self.infoDict[UIMainStoryboardFile] stringByAppendingPathExtension:staticStoryboard]]
-                        || [self.matchsFileArray inArray:file.fileName]) {
+                        ) {
+                        
                         [endPathsM removeObject:file];
                         break;
                     }
