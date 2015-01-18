@@ -73,7 +73,6 @@
 #pragma mark - set files
 - (void)setWorkspacePath:(NSString *)workspacePath{
     _workspacePath = workspacePath;
-    NSLog(@"ZLPath : %@",workspacePath);
     [[ZLCheckInfo sharedInstance] setWorkSpacePath:_workspacePath];
 }
 
