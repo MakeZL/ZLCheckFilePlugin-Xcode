@@ -39,6 +39,7 @@ static NSString *staticStoryboardCustomClass = @"customClass";
 
 // NSPrincipalClass staic
 static NSString *NSPrincipalClass = @"NSPrincipalClass";
+static NSString *staticStoryboardName = @"storyboardWithName:@";
 
 @implementation ZLCheckInfo
 
@@ -120,9 +121,11 @@ static id _instance = nil;
             
             NSMutableArray *endPathsM = [NSMutableArray arrayWithArray:allPathsM];
             NSMutableArray *deletePaths = [NSMutableArray array];
+            NSMutableArray *storyboardArrayM = [NSMutableArray array];
             
             for (ZLFile *file in allPathsM) {
-                
+                // recoder look storyboard
+                BOOL isImplementation = NO;
                 NSString *pathName = file.fileName;
                 NSString *mPath = [filePath stringByAppendingPathComponent:file.filePath];
                 NSString *content = [[NSString alloc] initWithContentsOfFile:mPath encoding:NSUTF8StringEncoding error:nil];
@@ -135,17 +138,26 @@ static id _instance = nil;
                     for (NSString *lineStr in mPathLineContents) {
                         
                         NSRange implementationRange = [lineStr rangeOfString:staticImplementation];
-                        if (implementationRange.location != NSNotFound) {
-                            break;
+                        if (implementationRange.location != NSNotFound || isImplementation) {
+                            NSRange storyboardRange = [lineStr rangeOfString:staticStoryboardName];
+                            if (storyboardRange.location != NSNotFound) {
+                                NSString *storyboardName = [lineStr substringFromIndex:storyboardRange.location + storyboardRange.length];
+                                storyboardName = [storyboardName substringFromIndex:1];
+                                NSRange range = [storyboardName rangeOfString:@"\""];
+                                storyboardName = [storyboardName substringWithRange:NSMakeRange(0, range.location)];
+                                [storyboardArrayM addObject:storyboardName];
+                            }
+                            
+                            isImplementation = YES;
                         }else{
                             NSRange preRange = [lineStr rangeOfString:staticImport];
+                        
                             NSRange includeRange = [lineStr rangeOfString:staticInclude];
                             if (preRange.location == NSNotFound) {
                                 preRange = includeRange;
                             }
                             
                             if (preRange.location != NSNotFound) {
-                                
                                 
                                 NSRange charRange = [lineStr rangeOfString:@"\""];
                                 NSInteger charIndex = 0;
@@ -182,19 +194,20 @@ static id _instance = nil;
             
             
             for (ZLFile *file in allPathsM) {
+                if ([self.matchsFileArray inArray:[file.fileName lastPathComponent]]|| [self.matchsFileArray inArray:[file.fileName pathExtension]] || [storyboardArrayM inArray:[file.fileName stringByDeletingPathExtension]]){
+                    [endPathsM removeObject:file];
+                }
                 
-                if ([self.matchsFileArray inArray:[file.fileName lastPathComponent]]|| [self.matchsFileArray inArray:[file.fileName pathExtension]]) {
+                if ([file.fileName rangeOfString:staticAppDelegate].location != NSNotFound
+                    || [file.fileName isEqualToString:[self.infoDict[UIMainStoryboardFile] stringByAppendingPathExtension:staticStoryboard]]
+                    || [[file.fileName stringByDeletingPathExtension] isEqualToString:self.infoDict[NSPrincipalClass]]
+                    ) {
                     [endPathsM removeObject:file];
                 }
                 
                 for (NSString *preStr in deletePaths) {
-                    
                     if (
-                        [[file.fileName stringByDeletingPathExtension] isEqualToString:[preStr stringByDeletingPathExtension]]
-                        || [file.fileName rangeOfString:staticAppDelegate].location != NSNotFound
-                        || [file.fileName isEqualToString:[self.infoDict[UIMainStoryboardFile] stringByAppendingPathExtension:staticStoryboard]]
-                        || [[file.fileName stringByDeletingPathExtension] isEqualToString:self.infoDict[NSPrincipalClass]]
-                        ) {
+                        [[file.fileName stringByDeletingPathExtension] isEqualToString:[preStr stringByDeletingPathExtension]]) {
                         
                         [endPathsM removeObject:file];
                         break;
