@@ -58,6 +58,7 @@ static NSString *NSPrincipalClass = @"NSPrincipalClass";
                              @"main.c",
                              @"main.cpp",
                              @"AppDelegate",
+                             @"pch",
                              ];
     }
     return _matchsFileArray;
@@ -182,7 +183,7 @@ static id _instance = nil;
             
             for (ZLFile *file in allPathsM) {
                 
-                if ([self.matchsFileArray inArray:[file.fileName lastPathComponent]]) {
+                if ([self.matchsFileArray inArray:[file.fileName lastPathComponent]]|| [self.matchsFileArray inArray:[file.fileName pathExtension]]) {
                     [endPathsM removeObject:file];
                 }
                 
