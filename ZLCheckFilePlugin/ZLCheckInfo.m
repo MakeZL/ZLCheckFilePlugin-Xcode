@@ -36,6 +36,10 @@ static NSString *staticInclude = @"#include";
 // storyboard static
 static NSString *staticStoryboardCustomClass = @"customClass";
 
+
+// NSPrincipalClass staic
+static NSString *NSPrincipalClass = @"NSPrincipalClass";
+
 @implementation ZLCheckInfo
 
 #pragma mark - lazy datas.
@@ -97,7 +101,7 @@ static id _instance = nil;
                         NSString *mPath = [filePath stringByAppendingPathComponent:pathName];
                         NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:mPath];
                         
-                        if ([dict valueForKeyPath:UIMainStoryboardFile]) {
+                        if ([dict valueForKeyPath:UIMainStoryboardFile] || [dict valueForKeyPath:NSPrincipalClass]) {
                             self.infoDict = dict;
                         }
                     }
@@ -188,6 +192,7 @@ static id _instance = nil;
                         [[file.fileName stringByDeletingPathExtension] isEqualToString:[preStr stringByDeletingPathExtension]]
                         || [file.fileName rangeOfString:staticAppDelegate].location != NSNotFound
                         || [file.fileName isEqualToString:[self.infoDict[UIMainStoryboardFile] stringByAppendingPathExtension:staticStoryboard]]
+                        || [[file.fileName stringByDeletingPathExtension] isEqualToString:self.infoDict[NSPrincipalClass]]
                         ) {
                         
                         [endPathsM removeObject:file];
