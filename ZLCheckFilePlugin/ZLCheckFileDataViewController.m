@@ -65,6 +65,7 @@
 
     NSString *open = [NSString stringWithFormat:@"open %@",path];
     const char *str = [open UTF8String];
+    system([[open stringByDeletingLastPathComponent] UTF8String]);
     system(str);
 }
 
