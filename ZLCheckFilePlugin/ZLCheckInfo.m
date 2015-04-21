@@ -216,8 +216,7 @@ static id _instance = nil;
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                _files = endPathsM;
-                callBack(_files);
+                callBack(endPathsM);
             });
         });
     
