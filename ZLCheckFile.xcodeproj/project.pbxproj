@@ -16,7 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		481D4A2E1A67D51B0003ECFC /* ZLCheckFilePlugin.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZLCheckFilePlugin.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		481D4A2E1A67D51B0003ECFC /* ZLCheckFile.xcplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZLCheckFile.xcplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		481D4A321A67D51B0003ECFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		481D4A381A67D5E70003ECFC /* ZLCheckFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLCheckFile.h; sourceTree = "<group>"; };
 		481D4A391A67D5E70003ECFC /* ZLCheckFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLCheckFile.m; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 		481D4A2F1A67D51B0003ECFC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				481D4A2E1A67D51B0003ECFC /* ZLCheckFilePlugin.xcplugin */,
+				481D4A2E1A67D51B0003ECFC /* ZLCheckFile.xcplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,9 +112,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		481D4A2D1A67D51B0003ECFC /* ZLCheckFilePlugin */ = {
+		481D4A2D1A67D51B0003ECFC /* ZLCheckFile */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 481D4A351A67D51B0003ECFC /* Build configuration list for PBXNativeTarget "ZLCheckFilePlugin" */;
+			buildConfigurationList = 481D4A351A67D51B0003ECFC /* Build configuration list for PBXNativeTarget "ZLCheckFile" */;
 			buildPhases = (
 				481D4A2A1A67D51B0003ECFC /* Sources */,
 				481D4A2B1A67D51B0003ECFC /* Frameworks */,
@@ -124,9 +124,9 @@
 			);
 			dependencies = (
 			);
-			name = ZLCheckFilePlugin;
+			name = ZLCheckFile;
 			productName = ZLCheckFilePlugin;
-			productReference = 481D4A2E1A67D51B0003ECFC /* ZLCheckFilePlugin.xcplugin */;
+			productReference = 481D4A2E1A67D51B0003ECFC /* ZLCheckFile.xcplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -143,7 +143,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 481D4A291A67D51B0003ECFC /* Build configuration list for PBXProject "ZLCheckFilePlugin" */;
+			buildConfigurationList = 481D4A291A67D51B0003ECFC /* Build configuration list for PBXProject "ZLCheckFile" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -155,7 +155,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				481D4A2D1A67D51B0003ECFC /* ZLCheckFilePlugin */,
+				481D4A2D1A67D51B0003ECFC /* ZLCheckFile */,
 			);
 		};
 /* End PBXProject section */
@@ -269,7 +269,7 @@
 				DSTROOT = "${HOME}";
 				INFOPLIST_FILE = ZLCheckFilePlugin/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ZLCheckFile;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = xcplugin;
 			};
@@ -283,7 +283,7 @@
 				DSTROOT = "${HOME}";
 				INFOPLIST_FILE = ZLCheckFilePlugin/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ZLCheckFile;
 				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = xcplugin;
 			};
@@ -292,7 +292,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		481D4A291A67D51B0003ECFC /* Build configuration list for PBXProject "ZLCheckFilePlugin" */ = {
+		481D4A291A67D51B0003ECFC /* Build configuration list for PBXProject "ZLCheckFile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				481D4A331A67D51B0003ECFC /* Debug */,
@@ -301,7 +301,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		481D4A351A67D51B0003ECFC /* Build configuration list for PBXNativeTarget "ZLCheckFilePlugin" */ = {
+		481D4A351A67D51B0003ECFC /* Build configuration list for PBXNativeTarget "ZLCheckFile" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				481D4A361A67D51B0003ECFC /* Debug */,
